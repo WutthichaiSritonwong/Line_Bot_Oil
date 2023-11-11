@@ -1,6 +1,0 @@
-from jinja2 import Environment
-from ruamel.yaml import YAML
-
-yaml = YAML(typ='safe')
-yaml_content = yaml.load(Environment().from_string(content).render())
-print(yaml_content['package'])
