@@ -95,7 +95,11 @@ send_message(
     "U5bc46a7d0b9480beefd4d8137b5c332c",
     response1,
 )
+
 schedule.every(1).minutes.do(send_message)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 if __name__ == "__main__":
     app.run()
 
