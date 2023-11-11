@@ -3,6 +3,8 @@ import time
 import json
 from flask import Flask, request, jsonify
 import requests
+import requests
+
 
 app = Flask(__name__)
 
@@ -99,31 +101,39 @@ response1 = f"ราคาน้ำมัน Update : {date}\n"
 for i in json_data:
     response1 += f"{i}\n"
 # ใช้ฟังก์ชัน send_message เพื่อส่งข้อความไปยัง Line
-send_image(
-    "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
-    "U5bc46a7d0b9480beefd4d8137b5c332c"
-)
+# send_image(
+#     "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
+#     "U5bc46a7d0b9480beefd4d8137b5c332c",
+# )
 
-send_message(
-    "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
-    "U5bc46a7d0b9480beefd4d8137b5c332c",
-    response1,
-)
+# send_message(
+#     "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
+#     "U5bc46a7d0b9480beefd4d8137b5c332c",
+#     response1,
+# )
 
 
 def job():
-    send_image(
-        "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
-        "U5bc46a7d0b9480beefd4d8137b5c332c"
-    )
-    send_message(
-        "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
-        "U5bc46a7d0b9480beefd4d8137b5c332c",
-        response1,
-    )
+    # send_image(
+    #     "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
+    #     "U5bc46a7d0b9480beefd4d8137b5c332c",
+    # )
+    # send_message(
+    #     "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
+    #     "U5bc46a7d0b9480beefd4d8137b5c332c",
+    #     response1,
+    # )
+    url = "https://notify-api.line.me/api/notify"
+    token = "FnwB8nYLFC9AIw2VXZEIDjbhXVIEv9sAoZ3HJrXZQO1"
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer " + token,
+    }
+    msg = response1
+    r = requests.post(url, headers=headers, data={"message": msg})
+    print (r.text)
 
-
-# schedule.every(1).minutes.do(job)
+schedule.every(1).minutes.do(job)
 # schedule.every().hour.do(job)
 # schedule.every().day.at("05:30").do(job)
 # schedule.every().monday.do(job)
@@ -132,7 +142,7 @@ def job():
 # schedule.every().minute.at(":17").do(job)
 
 # ทำทุกๆ 05.30 ของทุกๆวัน
-schedule.every().day.at("05:30").do(job)
+# schedule.every().day.at("05:30").do(job)
 
 while True:
     schedule.run_pending()
