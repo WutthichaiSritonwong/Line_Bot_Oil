@@ -96,14 +96,21 @@ send_message(
     response1,
 )
 
-schedule.every(1).minutes.do(send_message(
+def job():
+    send_message(
     "QN01ycDGxaiS1HGsfVecKp+K9OEWp55wV+Vb5t37JSPh2VouGorNBZhR+lpCucZtTXiUViFJCnjsH9rotOU3E+a5rP+W8Dsd45WiPpXSvT3VPWh7Q0exotCCp/qua9byp7eg3AyNl4NteMYU6WFPtgdB04t89/1O/w1cDnyilFU=",
     "U5bc46a7d0b9480beefd4d8137b5c332c",
     response1,
-))
+)
+#ทำทุกๆ 1 นาที 
+# schedule.every(1).minutes.do(job)
+#ทำทุกๆ 05.30 ของทุกๆวัน
+schedule.every().day.at("05:30").do(job)
+ 
 while True:
     schedule.run_pending()
     time.sleep(1)
+    
 if __name__ == "__main__":
     app.run()
 
