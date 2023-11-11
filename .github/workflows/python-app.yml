@@ -26,6 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install --upgrade pip
         python -m venv pytest-env
+        python -m pytest
         source pytest-env/Scripts/activate
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
     # pip install pytest
