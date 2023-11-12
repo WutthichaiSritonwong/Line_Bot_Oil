@@ -142,7 +142,7 @@ def job():
 # schedule.every().minute.at(":17").do(job)
 
 # ทำทุกๆ 05.30 ของทุกๆวัน
-schedule.every().day.at("05:30").do(job)
+schedule.every().day.at("10:10").do(job)
 
 while True:
     schedule.run_pending()
