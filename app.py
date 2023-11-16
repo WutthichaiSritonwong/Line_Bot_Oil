@@ -134,16 +134,16 @@ def job():
     r = requests.post(url, headers=headers, data={"message": msg})
     print (r.text)
 
-schedule.every(1).minutes.do(job)
+# schedule.every(1).minutes.do(job)
 # schedule.every().hour.do(job)
-# schedule.every().day.at("05:30").do(job)
+schedule.every().day.at("06:30").do(job)
 # schedule.every().monday.do(job)
 # schedule.every().wednesday.at("13:15").do(job)
 # schedule.every().day.at("12:42", "Europe/Amsterdam").do(job)
 # schedule.every().minute.at(":17").do(job)
 
 # ทำทุกๆ 05.30 ของทุกๆวัน
-schedule.every().day.at("10:10").do(job)
+# schedule.every().day.at("10:10").do(job)
 
 while True:
     schedule.run_pending()
