@@ -4,7 +4,7 @@ import json
 from flask import Flask, request, jsonify
 import requests
 import requests
-
+import pytz
 
 app = Flask(__name__)
 
@@ -145,10 +145,11 @@ schedule.every().day.at("11:52", "Europe/Amsterdam").do(job)
 
 # ทำทุกๆ 05.30 ของทุกๆวัน
 # schedule.every().day.at("10:10").do(job)
-
+if __name__ == "__main__":
+    app.run()
+    
 while True:
     schedule.run_pending()
     time.sleep(1)
 
-if __name__ == "__main__":
-    app.run()
+
